@@ -1,0 +1,272 @@
+# Color styles
+classes: {
+  sun-500: {
+    style: {
+      fill: "#ffd233"
+      stroke: "#ffc700"
+    }
+  }
+  sun-400: {
+    style: {
+      fill: "#fd6"
+      stroke: "#ffd233"
+    }
+  }
+  sun-300: {
+    style: {
+      fill: "#ffe999"
+      stroke: "#fd6"
+    }
+  }
+  sun-200: {
+    style: {
+      fill: "#fff4cc"
+      stroke: "#ffe999"
+    }
+  }
+  sun-100: {
+    style: {
+      fill: "#fffaeb"
+      stroke: "#fff4cc"
+    }
+  }
+  
+  mint-500: {
+    style: {
+      fill: "#9be8a8"
+      stroke: "#77d286"
+    }
+  }
+  mint-400: {
+    style: {
+      fill: "#c2eec9"
+      stroke: "#9be8a8"
+    }
+  }
+  mint-300: {
+    style: {
+      fill: "#d3f3d9"
+      stroke: "#c2eec9"
+    }
+  }
+  mint-200: {
+    style: {
+      fill: "#e5fae7"
+      stroke: "#d3f3d9"
+    }
+  }
+  mint-100: {
+    style: {
+      fill: "#eefcef"
+      stroke: "#e5fae7"
+    }
+  }
+  
+  clay-500: {
+    style: {
+      fill: "#fe9a9a"
+      stroke: "#dd7878"
+    }
+  }
+  clay-400: {
+    style: {
+      fill: "#fecdcd"
+      stroke: "#fe9a9a"
+    }
+  }
+  clay-300: {
+    style: {
+      fill: "#fddddd"
+      stroke: "#fecdcd"
+    }
+  }
+  clay-200: {
+    style: {
+      fill: "#fdefef"
+      stroke: "#fddddd"
+    }
+  }
+  clay-100: {
+    style: {
+      fill: "#fef5f5"
+      stroke: "#fdefef"
+    }
+  }
+  
+  sky-500: {
+    style: {
+      fill: "#9fe3f9"
+      stroke: "#6cc2dd"
+    }
+  }
+  sky-400: {
+    style: {
+      fill: "#bce9f8"
+      stroke: "#9fe3f9"
+    }
+  }
+  sky-300: {
+    style: {
+      fill: "#cdeff9"
+      stroke: "#bce9f8"
+    }
+  }
+  sky-200: {
+    style: {
+      fill: "#dbf2fa"
+      stroke: "#cdeff9"
+    }
+  }
+  sky-100: {
+    style: {
+      fill: "#e7f5f8"
+      stroke: "#dbf2fa"
+    }
+  }
+  grape-500: {
+    style: {
+      fill: "#c5b1e5"
+      stroke: "#aa8cdb"
+    }
+  }
+  grape-400: {
+    style: {
+      fill: "#d7caed"
+      stroke: "#c5b1e5"
+    }
+  }
+  grape-300: {
+    style: {
+      fill: "#e3daf2"
+      stroke: "#d7caed"
+    }
+  }
+  grape-200: {
+    style: {
+      fill: "#eee8f6"
+      stroke: "#e3daf2"
+    }
+  }
+  grape-100: {
+    style: {
+      fill: "#f7f4fa"
+      stroke: "#eee8f6"
+    }
+  }
+}
+
+
+
+s3: AWS S3{
+  class: grape-500
+  bucket: {
+    class: grape-400
+  #   grid-columns: 5
+  #   grid-rows: 2
+  #   simplepractice: simplepractice{
+  #     class: grape-300
+  #   }
+  #   simplepractice_messaging: simplepractice_messaging{
+  #     class: grape-300
+  #   }
+  #   simplepractice_video: simplepractice_video{
+  #     class: grape-300
+  #   }
+  #   simplepractice_events: simplepractice_events{
+  #     class: grape-300
+  #   }
+  #   sso_account: sso_account{
+  #     class: grape-300
+  #   }
+  #   monarch: monarch{
+  #     class: grape-300
+  #   }
+  #   trackyourhours: trackyourhours{
+  #     class: grape-300
+  #   }
+  #   trackyourhours_rails: trackyourhours_rails{
+  #     class: grape-300
+  #   }
+  #   releasebot: releasebot {
+  #     class: grape-300
+  #   }
+  #   trackyourceus: trackyourceus\n(deprecated){
+  #     class: clay-500
+  #   }    
+  }
+}
+
+dbt: dbt Driven Ingestion Process {
+  class: mint-500
+  external_tables: "*_ext Models" {
+    class: mint-400
+    description: "External tables" {
+      class: mint-300
+    }
+  }
+
+  tables: "Tables" {
+    class: mint-400
+    cdc: "*_cdc Models" {
+      class: mint-300
+      description: "Raw CDC data"{
+        class: mint-200
+      }
+    }
+  
+    scd: "*_scd Models" {
+      class: mint-300
+      description: "SCD Type II tracking tables"{
+        class: mint-200
+      }
+    }
+  }
+
+  views: Views {
+    class: mint-400
+    rt: "*_rt Models" {
+      class: mint-300
+      description: "\"Real-Time\" views with\n(full change log)"{
+        class: mint-200
+      }
+    }
+
+    ls: "*_ls Models" {
+      class: mint-300
+      description: "\"Latest-State\" views\n(includes deleted records)"{
+        class: mint-200
+      }
+    }
+
+    cs: "*_cs Models" {
+      class: mint-300
+      description: "\"Current-State\" views\n(excludes deleted records)"{
+        class: mint-200
+      }
+    }
+
+    ds: "*_ds Models" {
+      class: mint-300
+      description: "\"Date-Stamped\" views\n(daily representation of each record)"{
+        class: mint-200
+      }
+    }
+  }
+}
+
+snowflake: "Snowflake - Business Critical" {
+  class: sky-500
+}
+snowflake_enterprise: "Snowflake - Enterprise"{
+  class: sky-300
+}
+
+s3.bucket -> dbt.external_tables: "transform_cdc"
+dbt.external_tables -> dbt.tables.cdc: "transform_cdc"
+dbt.tables.cdc -> dbt.tables.scd: "generate_scd"
+dbt.tables -> dbt.views.rt: "generate_rt"
+dbt.tables -> dbt.views.ls: "generate_ls"
+dbt.tables -> dbt.views.cs: "generate_cs"
+dbt.tables -> dbt.views.ds: "generate_ds"
+dbt -> snowflake: "dbt managed objects"
+snowflake -> snowflake_enterprise: "secure data sharing"

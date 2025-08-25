@@ -1,0 +1,340 @@
+# Color styles
+classes: {
+  sun-500: {
+    style: {
+      fill: "#ffd233"
+      stroke: "#ffc700"
+    }
+  }
+  sun-400: {
+    style: {
+      fill: "#fd6"
+      stroke: "#ffd233"
+    }
+  }
+  sun-300: {
+    style: {
+      fill: "#ffe999"
+      stroke: "#fd6"
+    }
+  }
+  sun-200: {
+    style: {
+      fill: "#fff4cc"
+      stroke: "#ffe999"
+    }
+  }
+  sun-100: {
+    style: {
+      fill: "#fffaeb"
+      stroke: "#fff4cc"
+    }
+  }
+  
+  mint-500: {
+    style: {
+      fill: "#9be8a8"
+      stroke: "#77d286"
+    }
+  }
+  mint-400: {
+    style: {
+      fill: "#c2eec9"
+      stroke: "#9be8a8"
+    }
+  }
+  mint-300: {
+    style: {
+      fill: "#d3f3d9"
+      stroke: "#c2eec9"
+    }
+  }
+  mint-200: {
+    style: {
+      fill: "#e5fae7"
+      stroke: "#d3f3d9"
+    }
+  }
+  mint-100: {
+    style: {
+      fill: "#eefcef"
+      stroke: "#e5fae7"
+    }
+  }
+  
+  clay-500: {
+    style: {
+      fill: "#fe9a9a"
+      stroke: "#dd7878"
+    }
+  }
+  clay-400: {
+    style: {
+      fill: "#fecdcd"
+      stroke: "#fe9a9a"
+    }
+  }
+  clay-300: {
+    style: {
+      fill: "#fddddd"
+      stroke: "#fecdcd"
+    }
+  }
+  clay-200: {
+    style: {
+      fill: "#fdefef"
+      stroke: "#fddddd"
+    }
+  }
+  clay-100: {
+    style: {
+      fill: "#fef5f5"
+      stroke: "#fdefef"
+    }
+  }
+  
+  sky-500: {
+    style: {
+      fill: "#9fe3f9"
+      stroke: "#6cc2dd"
+    }
+  }
+  sky-400: {
+    style: {
+      fill: "#bce9f8"
+      stroke: "#9fe3f9"
+    }
+  }
+  sky-300: {
+    style: {
+      fill: "#cdeff9"
+      stroke: "#bce9f8"
+    }
+  }
+  sky-200: {
+    style: {
+      fill: "#dbf2fa"
+      stroke: "#cdeff9"
+    }
+  }
+  sky-100: {
+    style: {
+      fill: "#e7f5f8"
+      stroke: "#dbf2fa"
+    }
+  }
+  grape-500: {
+    style: {
+      fill: "#c5b1e5"
+      stroke: "#aa8cdb"
+    }
+  }
+  grape-400: {
+    style: {
+      fill: "#d7caed"
+      stroke: "#c5b1e5"
+    }
+  }
+  grape-300: {
+    style: {
+      fill: "#e3daf2"
+      stroke: "#d7caed"
+    }
+  }
+  grape-200: {
+    style: {
+      fill: "#eee8f6"
+      stroke: "#e3daf2"
+    }
+  }
+  grape-100: {
+    style: {
+      fill: "#f7f4fa"
+      stroke: "#eee8f6"
+    }
+  }
+}
+
+internal: Internal Data Sources {
+  class: sun-500
+  product: "Product Transactional Databases\n(AWS MySQL Aurora)" {
+    class: sun-400
+    grid-rows: 2
+    simplepractice: SimplePractice {
+      class: sun-300
+      simplepractice: simplepractice{
+        class: sun-200
+      }
+      simplepractice_messaging: simplepractice_messaging{
+        class: sun-200
+      }
+      simplepractice_video: simplepractice_video{
+        class: sun-200
+      }
+    }
+    simplepractice_events: simplepractice_events{
+      class: sun-300
+    }
+    monarch: monarch{
+      class: sun-300
+    }
+    sso_account: sso_account{
+      class: sun-300
+    }
+    trackyourhours: TrackYourHours {
+      class: sun-300
+      trackyourhours: trackyourhours{
+        class: sun-200
+      }
+      trackyourhours_rails: trackyourhours_rails{
+        class: sun-200
+      }
+    }
+    releasebot: releasebot {
+      class: sun-300
+    }
+    trackyourceus: trackyourceus\n(deprecated){
+      class: clay-500
+    }
+  }
+  infra: Infra  {
+    class: sun-400
+    releasebot: releasebot{
+      class: sun-300
+    }
+  }
+}
+
+external: External Data Sources {
+  class: sun-500
+  saas: SaaS {
+    grid-rows: 4
+    class: sun-400
+    stripe: Stripe {
+      class: sun-300
+    }
+    zendesk: Zendesk {
+      class: sun-300
+    }
+    segment: Segment {
+      class: sun-300
+    }
+    mixpanel: Mixpanel {
+      class: sun-300
+    }
+    google_ads: Google Ads {
+      class: sun-300
+    }
+    google_ana: Google Analytics {
+      class: sun-300
+    }
+    google_search: Google Search Console {
+      class: sun-300
+    }
+    facebook_ads: Facebook Ads {
+      class: sun-300
+    }
+    bing_ads: Bing Ads {
+      class: sun-300
+    }
+    hubspot: Hubspot {
+      class: sun-300
+    }
+    uservoice: UserVoice {
+      class: sun-300
+    }
+    capterra: Capterra {
+      class: sun-300
+    }
+    iterable: Iterable {
+      class: sun-300
+    }
+    partnerstack: PartnerStack {
+      class: sun-300
+    }
+    stackadapt: StackAdapt {
+      class: sun-300
+    }
+    rockerbox: RockerBox {
+      class: sun-300
+    }
+  }
+  public: Public Data Sets {
+    class: sun-400
+    nppes: NPPES\nProvider NPIs{
+      class: sun-300
+    }
+  }
+}
+
+lake: Lake (MySQL Read-Replica) {
+  class: mint-500
+  product: Product Replicas {
+    class: mint-400
+  }
+  infra: Infra Replicas {
+    class: mint-400
+  }
+}
+
+# AWS Services
+cdc: CDC Pipeline {
+  class: clay-500
+  aws: {
+    class: clay-400
+    dms: AWS DMS {
+      class: clay-300
+    }
+    s3: S3 Bucket {
+      class: clay-300
+      partitioning: "source_database/\nsource_table/\nyyyy/mm/dd/\n*.parquet"{
+        class: clay-200
+      }
+    }
+  }
+  dbt: simplepractice-cdc-dbt {
+    class: clay-400
+  }
+}
+
+# Snowflake
+snowflake: Snowflake {
+  class: sky-500
+  bc: Business Critical Account {
+    class: sky-400
+  }
+
+  enterprise: Enterprise Account {
+    class: sky-400
+  }
+}
+
+integration: Data Integration Tools {
+  class: grape-500
+  grid-rows: 3
+  fivetran: Fivetran {
+    class: grape-400
+  }
+  airbyte: Airbyte {
+    class: grape-400
+  }
+  custom: API\n(Custom Scripts) {
+    class: grape-400
+  }
+}
+
+
+# # Data flows
+internal.product -> lake.product: "Multi-Master MySQL Replication"
+internal.product -> lake.infra: "Multi-Master MySQL Replication"
+internal <-> cdc.aws.dms: "Log-based CDC"
+
+cdc.aws.dms -> cdc.aws.s3: "Raw CDC Messages\nBatch Files\nEvery 15 minutes"
+cdc.dbt <-> cdc.aws.s3: "External Tables"
+cdc.dbt <-> snowflake.bc: "Ingestion\n& Minor Transformation\n(Every 3 hours)"
+
+snowflake.bc <-> snowflake.enterprise: "Snowflake Private Data Sharing\n(data masking for BC to Enterprise)"
+
+external -> integration: "Connectors/Scripts"
+integration -> snowflake.enterprise
+integration -> snowflake.bc

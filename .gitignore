@@ -1,0 +1,33 @@
+# Environment variables
+.env
+.envrc
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node modules (for D2 setup scripts)
+node_modules/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+.tmp/
+
+# Backup files
+*.bak
+*.backup
+
+# D2 specific (if you want to exclude generated diagrams, uncomment below)
+# diagrams/
+# *.png
+# *.svg

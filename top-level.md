@@ -1,9 +1,3 @@
-# D2 Diagrams Repository
-
-## Sections
-
-- [Data Engineering](./data-engineering/)
-
 Welcome to our `data-diagrams` repository! This is a centralized location for all architectural and technical diagrams across our data groups.
 
 ## Table of Contents
