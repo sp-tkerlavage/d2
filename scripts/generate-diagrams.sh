@@ -70,8 +70,45 @@ if [ "$SHOW_HELP" = true ]; then
 fi
 
 # Source common functions
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/lib/common.sh"
+# Get the absolute path to the script directory - handle different scenarios
+if [ -n "${BASH_SOURCE[0]}" ]; then
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+else
+    # Fallback for when BASH_SOURCE is not available
+    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+fi
+
+# Additional fallback - if we're in GitHub Actions and the above didn't work
+if [ -n "$GITHUB_ACTIONS" ] && [ ! -f "$SCRIPT_DIR/lib/common.sh" ]; then
+    # Try from repository root
+    if [ -f "./scripts/lib/common.sh" ]; then
+        SCRIPT_DIR="./scripts"
+    elif [ -f "/home/runner/work/d2/d2/scripts/lib/common.sh" ]; then
+        SCRIPT_DIR="/home/runner/work/d2/d2/scripts"
+    fi
+fi
+
+# Debug output for GitHub Actions
+if [ -n "$GITHUB_ACTIONS" ]; then
+    echo "Running in GitHub Actions environment"
+    echo "Script directory: $SCRIPT_DIR"
+    echo "Current directory: $(pwd)"
+    echo "Looking for common.sh at: $SCRIPT_DIR/lib/common.sh"
+fi
+
+# Check if common.sh exists before sourcing
+if [ -f "$SCRIPT_DIR/lib/common.sh" ]; then
+    source "$SCRIPT_DIR/lib/common.sh"
+else
+    echo "Error: Cannot find $SCRIPT_DIR/lib/common.sh"
+    echo "Current directory: $(pwd)"
+    echo "Script location: ${BASH_SOURCE[0]:-$0}"
+    echo "Attempted paths:"
+    echo "  - $SCRIPT_DIR/lib/common.sh"
+    echo "  - ./scripts/lib/common.sh"
+    echo "  - /home/runner/work/d2/d2/scripts/lib/common.sh"
+    exit 1
+fi
 
 # Find project root and change to it
 PROJECT_ROOT=$(find_project_root)
