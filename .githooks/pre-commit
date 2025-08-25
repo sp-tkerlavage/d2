@@ -1,0 +1,194 @@
+#!/usr/bin/env bash
+
+# Pre-commit hook to automatically generate D2 diagrams and update READMEs
+# This hook is OPTIONAL - developers can choose to enable it
+# To enable: git config core.hooksPath .githooks
+
+set -e
+
+# Source common functions
+HOOKS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$HOOKS_DIR/.." && pwd)"
+source "$PROJECT_ROOT/scripts/lib/common.sh"
+
+echo -e "${BLUE}Running pre-commit hook for D2 diagram generation...${NC}"
+
+# Check if running in interactive mode (terminal attached)
+if [ -t 1 ]; then
+    INTERACTIVE=true
+else
+    INTERACTIVE=false
+fi
+
+# Already in project root from common.sh
+cd "$PROJECT_ROOT"
+
+# Get list of staged .d2 files
+STAGED_D2_FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep '\.d2$' || true)
+
+if [ -z "$STAGED_D2_FILES" ]; then
+    # No .d2 files staged, check for companion .md files that might need README updates
+    STAGED_MD_FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep '\.md$' | grep -v README.md || true)
+    
+    if [ -z "$STAGED_MD_FILES" ]; then
+        # Nothing to process
+        exit 0
+    fi
+    
+    echo -e "${GREEN}Found staged markdown files - updating READMEs...${NC}"
+    
+    # Get unique directories
+    AFFECTED_DIRS=$(echo "$STAGED_MD_FILES" | xargs -r dirname | sort -u)
+    
+    # Update READMEs for affected directories
+    for dir in $AFFECTED_DIRS; do
+        if update_readmes "$dir"; then
+            # Stage the updated README
+            if [ -f "$dir/README.md" ]; then
+                git add "$dir/README.md"
+                echo -e "${GREEN}✓ Updated and staged: $dir/README.md${NC}"
+            fi
+        fi
+    done
+    
+    # Update top-level README if needed
+    if echo "$STAGED_MD_FILES" | grep -q '^top-level\.md$'; then
+        update_readmes --top-level
+        git add README.md
+        echo -e "${GREEN}✓ Updated and staged: README.md${NC}"
+    fi
+    
+    exit 0
+fi
+
+echo -e "${GREEN}Found ${YELLOW}$(echo "$STAGED_D2_FILES" | wc -l)${GREEN} staged .d2 file(s)${NC}"
+
+# Load environment variables
+load_env
+
+# Check if D2 is installed (non-blocking for pre-commit)
+if ! command -v d2 &> /dev/null; then
+    echo -e "${YELLOW}⚠ D2 is not installed - skipping diagram generation${NC}"
+    echo "To install D2, run: ./scripts/setup-local.sh"
+    exit 0  # Don't block commit if D2 isn't installed
+fi
+
+# Generate diagrams for staged .d2 files
+echo -e "${BLUE}Generating diagrams...${NC}"
+GENERATED_FILES=""
+FAILED_FILES=""
+
+for d2_file in $STAGED_D2_FILES; do
+    if [ -f "$d2_file" ]; then
+        echo -e "${CYAN}→ Processing: $d2_file${NC}"
+        
+        # Show more output in interactive mode
+        if [ "$INTERACTIVE" = true ]; then
+            # Run with visible output
+            if ./scripts/generate-diagrams.sh "$d2_file" 2>&1 | sed 's/^/  /'; then
+                dir=$(dirname "$d2_file")
+                basename=$(basename "$d2_file" .d2)
+                png_file="$dir/diagrams/${basename}.png"
+                
+                if [ -f "$png_file" ]; then
+                    git add "$png_file"
+                    GENERATED_FILES="${GENERATED_FILES}${png_file}\n"
+                    echo -e "${GREEN}✓ Generated and staged: $png_file${NC}"
+                fi
+            else
+                FAILED_FILES="${FAILED_FILES}${d2_file}\n"
+                echo -e "${YELLOW}⚠ Failed to generate diagram for: $d2_file${NC}"
+            fi
+        else
+            # Run silently for non-interactive environments
+            if ./scripts/generate-diagrams.sh "$d2_file" > /dev/null 2>&1; then
+                dir=$(dirname "$d2_file")
+                basename=$(basename "$d2_file" .d2)
+                png_file="$dir/diagrams/${basename}.png"
+                
+                if [ -f "$png_file" ]; then
+                    git add "$png_file"
+                    GENERATED_FILES="${GENERATED_FILES}${png_file}\n"
+                    echo -e "${GREEN}✓ Generated and staged: $png_file${NC}"
+                fi
+            else
+                FAILED_FILES="${FAILED_FILES}${d2_file}\n"
+                echo -e "${YELLOW}⚠ Failed to generate diagram for: $d2_file${NC}"
+            fi
+        fi
+    fi
+done
+
+# Get unique directories for README updates
+AFFECTED_DIRS=$(echo "$STAGED_D2_FILES" | xargs -r dirname | sort -u)
+
+# Also check for staged companion .md files
+STAGED_MD_FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep '\.md$' | grep -v README.md || true)
+if [ -n "$STAGED_MD_FILES" ]; then
+    MD_DIRS=$(echo "$STAGED_MD_FILES" | xargs -r dirname | sort -u)
+    AFFECTED_DIRS=$(echo -e "$AFFECTED_DIRS\n$MD_DIRS" | sort -u)
+fi
+
+# Update READMEs for affected directories
+echo -e "${BLUE}Updating README files...${NC}"
+for dir in $AFFECTED_DIRS; do
+    if [ -n "$dir" ]; then
+        if update_readmes "$dir"; then
+            # Stage the updated README
+            if [ -f "$dir/README.md" ]; then
+                git add "$dir/README.md"
+                echo -e "${GREEN}✓ Updated and staged: $dir/README.md${NC}"
+            fi
+            
+            # Also update parent directories up to project root
+            current_dir="$dir"
+            while [ "$current_dir" != "." ] && [ "$current_dir" != "/" ]; do
+                parent_dir=$(dirname "$current_dir")
+                if [ -f "$parent_dir/README.md" ] || [ "$parent_dir" = "." ]; then
+                    if update_readmes "$parent_dir"; then
+                        if [ -f "$parent_dir/README.md" ]; then
+                            git add "$parent_dir/README.md"
+                            echo -e "${GREEN}✓ Updated and staged: $parent_dir/README.md${NC}"
+                        fi
+                    fi
+                fi
+                current_dir="$parent_dir"
+            done
+        fi
+    fi
+done
+
+# Update top-level README
+if update_readmes --top-level; then
+    git add README.md
+    echo -e "${GREEN}✓ Updated and staged: README.md${NC}"
+fi
+
+# Summary
+echo ""
+echo -e "${GREEN}Pre-commit hook completed!${NC}"
+
+# In interactive mode, show a summary of what was generated
+if [ "$INTERACTIVE" = true ] && [ -n "$GENERATED_FILES" ]; then
+    echo ""
+    echo -e "${CYAN}Generated files:${NC}"
+    echo -e "$GENERATED_FILES" | while read -r file; do
+        [ -n "$file" ] && echo -e "  ${GREEN}+${NC} $file"
+    done
+fi
+
+if [ -n "$FAILED_FILES" ]; then
+    echo -e "${YELLOW}Warning: Some diagrams failed to generate:${NC}"
+    echo -e "$FAILED_FILES"
+    echo -e "${YELLOW}You may want to check these files before committing.${NC}"
+    echo ""
+    echo -e "${YELLOW}Continue with commit anyway? (y/n)${NC}"
+    read -r response
+    if [[ ! "$response" =~ ^[Yy]$ ]]; then
+        echo -e "${RED}Commit aborted.${NC}"
+        exit 1
+    fi
+fi
+
+echo -e "${GREEN}All generated files have been staged.${NC}"
+exit 0

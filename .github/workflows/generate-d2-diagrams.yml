@@ -1,0 +1,194 @@
+name: Generate D2 Diagrams
+
+on:
+  pull_request:
+    branches: [stage]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      use_tala:
+        description: 'Use TALA layout engine (requires API key)'
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate-diagrams:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
+
+      - name: Configure git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch base branch
+        run: git fetch origin stage:stage
+
+      - name: Get changed files
+        id: changed-files
+        run: |
+          # Get all changed files
+          ALL_CHANGED=$(git diff --name-only --diff-filter=ACMRT stage...HEAD)
+          
+          # Get changed .d2 files
+          D2_FILES=$(echo "$ALL_CHANGED" | grep '\.d2$' || echo '')
+          echo "d2_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$D2_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+          # Get changed .md files (companion files for diagrams and directory-level content)
+          # This includes XX-*.md files and directory.md or directory-name.md files
+          MD_FILES=$(echo "$ALL_CHANGED" | grep '\.md$' | grep -v README.md || echo '')
+          echo "md_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$MD_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+          # Check if top-level.md was modified
+          TOP_LEVEL_CHANGED=$(echo "$MD_FILES" | grep '^top-level\.md$' || echo '')
+          echo "top_level_changed=$TOP_LEVEL_CHANGED" >> $GITHUB_OUTPUT
+          
+          # Determine which .d2 files need generation (those without corresponding PNG changes)
+          D2_FILES_TO_GENERATE=""
+          if [ -n "$D2_FILES" ]; then
+            while IFS= read -r d2_file; do
+              if [ -n "$d2_file" ]; then
+                dir=$(dirname "$d2_file")
+                basename=$(basename "$d2_file" .d2)
+                png_file="$dir/diagrams/${basename}.png"
+                
+                # Check if the corresponding PNG was also changed
+                if echo "$ALL_CHANGED" | grep -q "^${png_file}$"; then
+                  echo "Skipping generation for $d2_file (PNG already committed)"
+                else
+                  D2_FILES_TO_GENERATE="${D2_FILES_TO_GENERATE}${d2_file}"$'\n'
+                fi
+              fi
+            done <<< "$D2_FILES"
+          fi
+          
+          # Output the list of .d2 files that need generation
+          echo "d2_files_to_generate<<EOF" >> $GITHUB_OUTPUT
+          echo "$D2_FILES_TO_GENERATE" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+          # Get directories that need README updates (any .d2 or .md changes)
+          if [ -n "$D2_FILES" ] || [ -n "$MD_FILES" ]; then
+            # Filter out top-level.md from directory processing
+            DIRS=$(echo -e "$D2_FILES\n$MD_FILES" | grep -v '^top-level\.md$' | xargs -r dirname | sort -u)
+            echo "affected_dirs<<EOF" >> $GITHUB_OUTPUT
+            echo "$DIRS" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "affected_dirs=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install D2
+        if: steps.changed-files.outputs.d2_files_to_generate != ''
+        env:
+          TSTRUCT_TOKEN: ${{ secrets.TALA_API_KEY }}
+          GITHUB_ACTIONS: true
+        run: |
+          # Use the shared setup script in unattended mode
+          ./scripts/setup-local.sh --ci
+      
+
+      - name: Cache playwright binaries
+        if: steps.changed-files.outputs.d2_files_to_generate != ''
+        id: cache-playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
+      - name: Install playwright
+        if: steps.changed-files.outputs.d2_files_to_generate != '' && steps.cache-playwright.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Generate diagrams
+        if: steps.changed-files.outputs.d2_files_to_generate != ''
+        env:
+          TSTRUCT_TOKEN: ${{ secrets.TALA_API_KEY }}
+        run: |
+          echo "Generating diagrams for changed .d2 files that don't have updated PNGs..."
+          
+          # Use the shared script for diagram generation
+          echo "${{ steps.changed-files.outputs.d2_files_to_generate }}" | while IFS= read -r file; do
+            if [ -n "$file" ]; then
+              ./scripts/generate-diagrams.sh "$file"
+            fi
+          done
+
+      - name: Set up Python
+        if: steps.changed-files.outputs.affected_dirs != ''
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Generate README files
+        if: steps.changed-files.outputs.affected_dirs != ''
+        run: |
+          echo "Updating README files for affected directories..."
+          python .github/scripts/generate-readmes.py "${{ steps.changed-files.outputs.affected_dirs }}"
+
+      - name: Generate top-level README
+        if: steps.changed-files.outputs.affected_dirs != '' || steps.changed-files.outputs.top_level_changed != ''
+        run: |
+          python .github/scripts/generate-readmes.py --top-level
+
+      - name: Commit and push changes
+        if: steps.changed-files.outputs.d2_files != '' || steps.changed-files.outputs.md_files != ''
+        run: |
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-generate D2 diagrams and update README files"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
+
+      - name: Comment on PR
+        if: steps.changed-files.outputs.d2_files != '' || steps.changed-files.outputs.md_files != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const changedD2Files = `${{ steps.changed-files.outputs.d2_files }}`.split('\n').filter(f => f);
+            const generatedD2Files = `${{ steps.changed-files.outputs.d2_files_to_generate }}`.split('\n').filter(f => f);
+            const skippedCount = changedD2Files.length - generatedD2Files.length;
+            
+            let body = '';
+            
+            if (generatedD2Files.length > 0) {
+              body += `✅ Successfully generated ${generatedD2Files.length} diagram${generatedD2Files.length > 1 ? 's' : ''}`;
+              if (skippedCount > 0) {
+                body += ` (${skippedCount} already committed)`;
+              }
+              body += ' and updated README files.\n\n';
+              body += `**Generated diagrams:**\n`;
+              body += generatedD2Files.map(f => `- \`${f}\` → \`${f.replace('.d2', '.png').replace(/([^\/]+)$/, 'diagrams/$1')}\``).join('\n');
+            } else if (skippedCount > 0) {
+              body = `📝 Updated README files only. All ${skippedCount} diagram${skippedCount > 1 ? 's were' : ' was'} already generated locally and committed.`;
+            } else if (`${{ steps.changed-files.outputs.md_files }}`) {
+              body = `📝 Updated README files based on markdown changes.`;
+            }
+            
+            if (body) {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            }
