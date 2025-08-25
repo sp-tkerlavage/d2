@@ -1,0 +1,191 @@
+# Color styles
+classes: {
+  sun-500: {
+    style: {
+      fill: "#ffd233"
+      stroke: "#ffc700"
+    }
+  }
+  sun-400: {
+    style: {
+      fill: "#fd6"
+      stroke: "#ffd233"
+    }
+  }
+  sun-300: {
+    style: {
+      fill: "#ffe999"
+      stroke: "#fd6"
+    }
+  }
+  sun-200: {
+    style: {
+      fill: "#fff4cc"
+      stroke: "#ffe999"
+    }
+  }
+  sun-100: {
+    style: {
+      fill: "#fffaeb"
+      stroke: "#fff4cc"
+    }
+  }
+  
+  mint-500: {
+    style: {
+      fill: "#9be8a8"
+      stroke: "#77d286"
+    }
+  }
+  mint-400: {
+    style: {
+      fill: "#c2eec9"
+      stroke: "#9be8a8"
+    }
+  }
+  mint-300: {
+    style: {
+      fill: "#d3f3d9"
+      stroke: "#c2eec9"
+    }
+  }
+  mint-200: {
+    style: {
+      fill: "#e5fae7"
+      stroke: "#d3f3d9"
+    }
+  }
+  mint-100: {
+    style: {
+      fill: "#eefcef"
+      stroke: "#e5fae7"
+    }
+  }
+  
+  clay-500: {
+    style: {
+      fill: "#fe9a9a"
+      stroke: "#dd7878"
+    }
+  }
+  clay-400: {
+    style: {
+      fill: "#fecdcd"
+      stroke: "#fe9a9a"
+    }
+  }
+  clay-300: {
+    style: {
+      fill: "#fddddd"
+      stroke: "#fecdcd"
+    }
+  }
+  clay-200: {
+    style: {
+      fill: "#fdefef"
+      stroke: "#fddddd"
+    }
+  }
+  clay-100: {
+    style: {
+      fill: "#fef5f5"
+      stroke: "#fdefef"
+    }
+  }
+  
+  sky-500: {
+    style: {
+      fill: "#9fe3f9"
+      stroke: "#6cc2dd"
+    }
+  }
+  sky-400: {
+    style: {
+      fill: "#bce9f8"
+      stroke: "#9fe3f9"
+    }
+  }
+  sky-300: {
+    style: {
+      fill: "#cdeff9"
+      stroke: "#bce9f8"
+    }
+  }
+  sky-200: {
+    style: {
+      fill: "#dbf2fa"
+      stroke: "#cdeff9"
+    }
+  }
+  sky-100: {
+    style: {
+      fill: "#e7f5f8"
+      stroke: "#dbf2fa"
+    }
+  }
+  grape-500: {
+    style: {
+      fill: "#c5b1e5"
+      stroke: "#aa8cdb"
+    }
+  }
+  grape-400: {
+    style: {
+      fill: "#d7caed"
+      stroke: "#c5b1e5"
+    }
+  }
+  grape-300: {
+    style: {
+      fill: "#e3daf2"
+      stroke: "#d7caed"
+    }
+  }
+  grape-200: {
+    style: {
+      fill: "#eee8f6"
+      stroke: "#e3daf2"
+    }
+  }
+  grape-100: {
+    style: {
+      fill: "#f7f4fa"
+      stroke: "#eee8f6"
+    }
+  }
+}
+
+
+product: "Product Transactionals Databases\n(AWS MySQL Aurora)" {
+  class: sun-500
+}
+dms: "AWS DMS" {
+  class: clay-500
+}
+s3: "AWS S3" {
+  class: grape-500
+}
+dbt: "dbt Driven Ingestion Process"{
+  class: mint-500
+}
+snowflake: "Snowflake - Business Critical" {
+  class: sky-500
+  cdc: "CDC Tables"{
+    class: sky-300
+  }
+  analytics: "Analytics-Ready Views"{
+    class: sky-300
+  }
+}
+snowflake_enterprise: "Snowflake - Enterprise"{
+  class: sky-300
+}
+
+product <-> dms: "binlog-to-CDC\n(additional metadata)"
+dms -> s3: "parquet filesssss"
+s3 <-> dbt: "sexternal tables"
+dbt -> snowflake.cdc: "dbts managed ingestionsss"
+snowflake.cdc -> snowflake.analytics
+dbt -> snowflake.analytics: "dbt managed views\n(with tag-based masking policies)"
+snowflake.analytics -> snowflake_enterprise: "secure data sharing"
+
