@@ -35,3 +35,9 @@ test
 For more information visit our [DMS page on Notion](https://www.notion.so/simplepractice/Product-Data-Ingestion-What-is-AWS-DMS-Why-AWS-DMS-8fc9be0f9f634f298c46589650ab16a9)
 
 ![Dms](./diagrams/02-dms.png)
+
+---
+
+## 03 - Dbt Macros
+
+![Dbt Macros](./diagrams/03-dbt-macros.png)
