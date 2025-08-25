@@ -1,0 +1,604 @@
+# Color styles
+classes: {
+  sun-500: {
+    style: {
+      fill: "#ffd233"
+      stroke: "#ffc700"
+    }
+  }
+  sun-400: {
+    style: {
+      fill: "#fd6"
+      stroke: "#ffd233"
+    }
+  }
+  sun-300: {
+    style: {
+      fill: "#ffe999"
+      stroke: "#fd6"
+    }
+  }
+  sun-200: {
+    style: {
+      fill: "#fff4cc"
+      stroke: "#ffe999"
+    }
+  }
+  sun-100: {
+    style: {
+      fill: "#fffaeb"
+      stroke: "#fff4cc"
+    }
+  }
+  
+  mint-500: {
+    style: {
+      fill: "#9be8a8"
+      stroke: "#77d286"
+    }
+  }
+  mint-400: {
+    style: {
+      fill: "#c2eec9"
+      stroke: "#9be8a8"
+    }
+  }
+  mint-300: {
+    style: {
+      fill: "#d3f3d9"
+      stroke: "#c2eec9"
+    }
+  }
+  mint-200: {
+    style: {
+      fill: "#e5fae7"
+      stroke: "#d3f3d9"
+    }
+  }
+  mint-100: {
+    style: {
+      fill: "#eefcef"
+      stroke: "#e5fae7"
+    }
+  }
+  
+  clay-500: {
+    style: {
+      fill: "#fe9a9a"
+      stroke: "#dd7878"
+    }
+  }
+  clay-400: {
+    style: {
+      fill: "#fecdcd"
+      stroke: "#fe9a9a"
+    }
+  }
+  clay-300: {
+    style: {
+      fill: "#fddddd"
+      stroke: "#fecdcd"
+    }
+  }
+  clay-200: {
+    style: {
+      fill: "#fdefef"
+      stroke: "#fddddd"
+    }
+  }
+  clay-100: {
+    style: {
+      fill: "#fef5f5"
+      stroke: "#fdefef"
+    }
+  }
+  
+  sky-500: {
+    style: {
+      fill: "#9fe3f9"
+      stroke: "#6cc2dd"
+    }
+  }
+  sky-400: {
+    style: {
+      fill: "#bce9f8"
+      stroke: "#9fe3f9"
+    }
+  }
+  sky-300: {
+    style: {
+      fill: "#cdeff9"
+      stroke: "#bce9f8"
+    }
+  }
+  sky-200: {
+    style: {
+      fill: "#dbf2fa"
+      stroke: "#cdeff9"
+    }
+  }
+  sky-100: {
+    style: {
+      fill: "#e7f5f8"
+      stroke: "#dbf2fa"
+    }
+  }
+  
+  forest-500: {
+    style: {
+      fill: "#7f9595"
+      stroke: "#617c7c"
+    }
+  }
+  forest-400: {
+    style: {
+      fill: "#9eaeae"
+      stroke: "#7f9595"
+    }
+  }
+  forest-300: {
+    style: {
+      fill: "#bec9c9"
+      stroke: "#9eaeae"
+    }
+  }
+  forest-200: {
+    style: {
+      fill: "#dee3e3"
+      stroke: "#bec9c9"
+    }
+  }
+  forest-100: {
+    style: {
+      fill: "#eef1f1"
+      stroke: "#dee3e3"
+    }
+  }
+
+  grape-500: {
+    style: {
+      fill: "#c5b1e5"
+      stroke: "#aa8cdb"
+    }
+  }
+  grape-400: {
+    style: {
+      fill: "#d7caed"
+      stroke: "#c5b1e5"
+    }
+  }
+  grape-300: {
+    style: {
+      fill: "#e3daf2"
+      stroke: "#d7caed"
+    }
+  }
+  grape-200: {
+    style: {
+      fill: "#eee8f6"
+      stroke: "#e3daf2"
+    }
+  }
+  grape-100: {
+    style: {
+      fill: "#f7f4fa"
+      stroke: "#eee8f6"
+    }
+  }
+}
+
+direction: right
+
+s3: AWS S3{
+  class: grape-500
+  bucket{
+    class: grape-400
+    simplepractice: simplepractice{
+      class: grape-300
+    }
+    simplepractice_messaging: simplepractice_messaging{
+      class: grape-300
+    }
+    simplepractice_video: simplepractice_video{
+      class: grape-300
+    }
+    simplepractice_events: simplepractice_events{
+      class: grape-300
+    }
+    sso_account: sso_account{
+      class: grape-300
+    }
+    monarch: monarch{
+      class: grape-300
+    }
+    trackyourhours: trackyourhours{
+      class: grape-300
+    }
+    trackyourhours_rails: trackyourhours_rails{
+      class: grape-300
+    }
+    releasebot: releasebot {
+      class: grape-300
+    }
+    trackyourceus: trackyourceus\n(deprecated){
+      class: clay-500
+    }
+  }
+}
+
+
+snowflake: "Snowflake - Business Critical" {
+  class: sky-500
+  prod_cdc: {
+    class: sky-400
+    simplepractice: simplepractice Schemas{
+      class: sky-300
+      simplepractice_ext: simplepractice_ext{
+        class: sky-100
+      }
+      tables: {
+        class: sky-200
+        simplepractice_cdc: simplepractice_cdc{
+          class: sky-100
+        }
+        simplepractice_scd: simplepractice_scd{
+          class: sky-100
+        }
+      }
+      views: {
+        class: sky-200
+        grid-rows: 2
+        simplepractice_rt: simplepractice_rt{
+          class: sky-100
+        }
+        simplepractice_cs: simplepractice_cs{
+          class: sky-100
+        }
+        simplepractice_ds: simplepractice_ds{
+          class: sky-100
+        }
+        simplepractice: simplepractice{
+          class: sky-100
+        }
+      }
+    }
+
+    simplepractice_messaging: simplepractice_messaging Schemas{
+      class: sky-300
+      simplepractice_messaging_ext: simplepractice_messaging_ext{
+        class: sky-100
+      }
+      tables: {
+        class: sky-200
+        simplepractice_messaging_cdc: simplepractice_messaging_cdc{
+          class: sky-100
+        }
+        simplepractice_messaging_scd: simplepractice_messaging_scd{
+          class: sky-100
+        }
+      }
+      views: {
+        class: sky-200
+        grid-rows: 2
+        simplepractice_messaging_rt: simplepractice_messaging_rt{
+          class: sky-100
+        }
+        simplepractice_messaging_cs: simplepractice_messaging_cs{
+          class: sky-100
+        }
+        simplepractice_messaging_ds: simplepractice_messaging_ds{
+          class: sky-100
+        }
+        simplepractice_messaging: simplepractice_messaging{
+          class: sky-100
+        }
+      }
+    }
+
+    simplepractice_video: simplepractice_video Schemas{
+      class: sky-300
+      simplepractice_video_ext: simplepractice_video_ext{
+        class: sky-100
+      }
+      tables: {
+        class: sky-200
+        simplepractice_video_cdc: simplepractice_video_cdc{
+          class: sky-100
+        }
+        simplepractice_video_scd: simplepractice_video_scd{
+          class: sky-100
+        }
+      }
+      views: {
+        class: sky-200
+        grid-rows: 2
+        simplepractice_video_rt: simplepractice_video_rt{
+          class: sky-100
+        }
+        simplepractice_video_cs: simplepractice_video_cs{
+          class: sky-100
+        }
+        simplepractice_video_ds: simplepractice_video_ds{
+          class: sky-100
+        }
+        simplepractice_video: simplepractice_video{
+          class: sky-100
+        }
+      }
+    }
+
+    simplepractice_events: simplepractice_events Schemas{
+      class: sky-300
+      simplepractice_events_ext: simplepractice_events_ext{
+        class: sky-100
+      }
+      tables: {
+        class: sky-200
+        simplepractice_events_cdc: simplepractice_events_cdc{
+          class: sky-100
+        }
+        simplepractice_events_scd: simplepractice_events_scd{
+          class: sky-100
+        }
+      }
+      views: {
+        class: sky-200
+        grid-rows: 2
+        simplepractice_events_rt: simplepractice_events_rt{
+          class: sky-100
+        }
+        simplepractice_events_cs: simplepractice_events_cs{
+          class: sky-100
+        }
+        simplepractice_events_ds: simplepractice_events_ds{
+          class: sky-100
+        }
+        simplepractice_events: simplepractice_events{
+          class: sky-100
+        }
+      }
+    }
+
+    sso_account: sso_account Schemas{
+      class: sky-300
+      sso_account_ext: sso_account_ext{
+        class: sky-100
+      }
+      tables: {
+        class: sky-200
+        sso_account_cdc: sso_account_cdc{
+          class: sky-100
+        }
+        sso_account_scd: sso_account_scd{
+          class: sky-100
+        }
+      }
+      views: {
+        class: sky-200
+        grid-rows: 2
+        sso_account_rt: sso_account_rt{
+          class: sky-100
+        }
+        sso_account_cs: sso_account_cs{
+          class: sky-100
+        }
+        sso_account_ds: sso_account_ds{
+          class: sky-100
+        }
+        sso_account: sso_account{
+          class: sky-100
+        }
+      }
+    }
+
+    monarch: monarch Schemas{
+      class: sky-300
+      monarch_ext: monarch_ext{
+        class: sky-100
+      }
+      tables: {
+        class: sky-200
+        monarch_cdc: monarch_cdc{
+          class: sky-100
+        }
+        monarch_scd: monarch_scd{
+          class: sky-100
+        }
+      }
+      views: {
+        class: sky-200
+        grid-rows: 2
+        monarch_rt: monarch_rt{
+          class: sky-100
+        }
+        monarch_cs: monarch_cs{
+          class: sky-100
+        }
+        monarch_ds: monarch_ds{
+          class: sky-100
+        }
+        monarch: monarch{
+          class: sky-100
+        }
+      }
+    }
+
+    trackyourhours: trackyourhours Schemas{
+      class: sky-300
+      trackyourhours_ext: trackyourhours_ext{
+        class: sky-100
+      }
+      tables: {
+        class: sky-200
+        trackyourhours_cdc: trackyourhours_cdc{
+          class: sky-100
+        }
+        trackyourhours_scd: trackyourhours_scd{
+          class: sky-100
+        }
+      }
+      views: {
+        class: sky-200
+        grid-rows: 2
+        trackyourhours_rt: trackyourhours_rt{
+          class: sky-100
+        }
+        trackyourhours_cs: trackyourhours_cs{
+          class: sky-100
+        }
+        trackyourhours_ds: trackyourhours_ds{
+          class: sky-100
+        }
+        trackyourhours: trackyourhours{
+          class: sky-100
+        }
+      }
+    }
+
+    trackyourhours_rails: trackyourhours_rails Schemas{
+      class: sky-300
+      trackyourhours_rails_ext: trackyourhours_rails_ext{
+        class: sky-100
+      }
+      tables: {
+        class: sky-200
+        trackyourhours_rails_cdc: trackyourhours_rails_cdc{
+          class: sky-100
+        }
+        trackyourhours_rails_scd: trackyourhours_rails_scd{
+          class: sky-100
+        }
+      }
+      views: {
+        class: sky-200
+        grid-rows: 2
+        trackyourhours_rails_rt: trackyourhours_rails_rt{
+          class: sky-100
+        }
+        trackyourhours_rails_cs: trackyourhours_rails_cs{
+          class: sky-100
+        }
+        trackyourhours_rails_ds: trackyourhours_rails_ds{
+          class: sky-100
+        }
+        trackyourhours_rails: trackyourhours_rails{
+          class: sky-100
+        }
+      }
+    }
+
+    releasebot: releasebot Schemas{
+      class: sky-300
+      releasebot_ext: releasebot_ext{
+        class: sky-100
+      }
+      tables: {
+        class: sky-200
+        releasebot_cdc: releasebot_cdc{
+          class: sky-100
+        }
+        releasebot_scd: releasebot_scd{
+          class: sky-100
+        }
+      }
+      views: {
+        class: sky-200
+        grid-rows: 2
+        releasebot_rt: releasebot_rt{
+          class: sky-100
+        }
+        releasebot_cs: releasebot_cs{
+          class: sky-100
+        }
+        releasebot_ds: releasebot_ds{
+          class: sky-100
+        }
+        releasebot: releasebot{
+          class: sky-100
+        }
+      }
+    }
+
+    trackyourceus: trackyourceus Schemas{
+      class: clay-300
+      trackyourceus_ext: trackyourceus_ext{
+        class: clay-100
+      }
+      tables: {
+        class: clay-200
+        trackyourceus_cdc: trackyourceus_cdc{
+          class: clay-100
+        }
+        trackyourceus_scd: trackyourceus_scd{
+          class: clay-100
+        }
+      }
+      views: {
+        class: clay-200
+        grid-rows: 2
+        trackyourceus_rt: trackyourceus_rt{
+          class: clay-100
+        }
+        trackyourceus_cs: trackyourceus_cs{
+          class: clay-100
+        }
+        trackyourceus_ds: trackyourceus_ds{
+          class: clay-100
+        }
+        trackyourceus: trackyourceus{
+          class: clay-100
+        }
+      }
+    }
+  }
+}
+
+s3.bucket.simplepractice <-> snowflake.prod_cdc.simplepractice.simplepractice_ext
+snowflake.prod_cdc.simplepractice.simplepractice_ext -> snowflake.prod_cdc.simplepractice.tables.simplepractice_cdc: "Incremental\nappend-only"
+snowflake.prod_cdc.simplepractice.tables.simplepractice_cdc -> snowflake.prod_cdc.simplepractice.tables.simplepractice_scd: "SCD Type II"
+snowflake.prod_cdc.simplepractice.tables -> snowflake.prod_cdc.simplepractice.views
+
+s3.bucket.simplepractice_messaging <-> snowflake.prod_cdc.simplepractice_messaging.simplepractice_messaging_ext
+snowflake.prod_cdc.simplepractice_messaging.simplepractice_messaging_ext -> snowflake.prod_cdc.simplepractice_messaging.tables.simplepractice_messaging_cdc: "Incremental\nappend-only"
+snowflake.prod_cdc.simplepractice_messaging.tables.simplepractice_messaging_cdc -> snowflake.prod_cdc.simplepractice_messaging.tables.simplepractice_messaging_scd: "SCD Type II"
+snowflake.prod_cdc.simplepractice_messaging.tables -> snowflake.prod_cdc.simplepractice_messaging.views
+
+s3.bucket.simplepractice_video <-> snowflake.prod_cdc.simplepractice_video.simplepractice_video_ext
+snowflake.prod_cdc.simplepractice_video.simplepractice_video_ext -> snowflake.prod_cdc.simplepractice_video.tables.simplepractice_video_cdc: "Incremental\nappend-only"
+snowflake.prod_cdc.simplepractice_video.tables.simplepractice_video_cdc -> snowflake.prod_cdc.simplepractice_video.tables.simplepractice_video_scd: "SCD Type II"
+snowflake.prod_cdc.simplepractice_video.tables -> snowflake.prod_cdc.simplepractice_video.views
+
+s3.bucket.simplepractice_events <-> snowflake.prod_cdc.simplepractice_events.simplepractice_events_ext
+snowflake.prod_cdc.simplepractice_events.simplepractice_events_ext -> snowflake.prod_cdc.simplepractice_events.tables.simplepractice_events_cdc: "Incremental\nappend-only"
+snowflake.prod_cdc.simplepractice_events.tables.simplepractice_events_cdc -> snowflake.prod_cdc.simplepractice_events.tables.simplepractice_events_scd: "SCD Type II"
+snowflake.prod_cdc.simplepractice_events.tables -> snowflake.prod_cdc.simplepractice_events.views
+
+s3.bucket.sso_account <-> snowflake.prod_cdc.sso_account.sso_account_ext
+snowflake.prod_cdc.sso_account.sso_account_ext -> snowflake.prod_cdc.sso_account.tables.sso_account_cdc: "Incremental\nappend-only"
+snowflake.prod_cdc.sso_account.tables.sso_account_cdc -> snowflake.prod_cdc.sso_account.tables.sso_account_scd: "SCD Type II"
+snowflake.prod_cdc.sso_account.tables -> snowflake.prod_cdc.sso_account.views
+
+s3.bucket.monarch <-> snowflake.prod_cdc.monarch.monarch_ext
+snowflake.prod_cdc.monarch.monarch_ext -> snowflake.prod_cdc.monarch.tables.monarch_cdc: "Incremental\nappend-only"
+snowflake.prod_cdc.monarch.tables.monarch_cdc -> snowflake.prod_cdc.monarch.tables.monarch_scd: "SCD Type II"
+snowflake.prod_cdc.monarch.tables -> snowflake.prod_cdc.monarch.views
+
+s3.bucket.trackyourhours <-> snowflake.prod_cdc.trackyourhours.trackyourhours_ext
+snowflake.prod_cdc.trackyourhours.trackyourhours_ext -> snowflake.prod_cdc.trackyourhours.tables.trackyourhours_cdc: "Incremental\nappend-only"
+snowflake.prod_cdc.trackyourhours.tables.trackyourhours_cdc -> snowflake.prod_cdc.trackyourhours.tables.trackyourhours_scd: "SCD Type II"
+snowflake.prod_cdc.trackyourhours.tables -> snowflake.prod_cdc.trackyourhours.views
+
+s3.bucket.trackyourhours_rails <-> snowflake.prod_cdc.trackyourhours_rails.trackyourhours_rails_ext
+snowflake.prod_cdc.trackyourhours_rails.trackyourhours_rails_ext -> snowflake.prod_cdc.trackyourhours_rails.tables.trackyourhours_rails_cdc: "Incremental\nappend-only"
+snowflake.prod_cdc.trackyourhours_rails.tables.trackyourhours_rails_cdc -> snowflake.prod_cdc.trackyourhours_rails.tables.trackyourhours_rails_scd: "SCD Type II"
+snowflake.prod_cdc.trackyourhours_rails.tables -> snowflake.prod_cdc.trackyourhours_rails.views
+
+s3.bucket.releasebot <-> snowflake.prod_cdc.releasebot.releasebot_ext
+snowflake.prod_cdc.releasebot.releasebot_ext -> snowflake.prod_cdc.releasebot.tables.releasebot_cdc: "Incremental\nappend-only"
+snowflake.prod_cdc.releasebot.tables.releasebot_cdc -> snowflake.prod_cdc.releasebot.tables.releasebot_scd: "SCD Type II"
+snowflake.prod_cdc.releasebot.tables -> snowflake.prod_cdc.releasebot.views
+
+s3.bucket.trackyourceus <-> snowflake.prod_cdc.trackyourceus.trackyourceus_ext
+snowflake.prod_cdc.trackyourceus.trackyourceus_ext -> snowflake.prod_cdc.trackyourceus.tables.trackyourceus_cdc: "Incremental\nappend-only"
+snowflake.prod_cdc.trackyourceus.tables.trackyourceus_cdc -> snowflake.prod_cdc.trackyourceus.tables.trackyourceus_scd: "SCD Type II"
+snowflake.prod_cdc.trackyourceus.tables -> snowflake.prod_cdc.trackyourceus.views

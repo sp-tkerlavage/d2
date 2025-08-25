@@ -1,0 +1,3 @@
+At a high level, we access the files that DMS stages in S3 via Snowflake external tables, then that data is ingested into Snowflake in *_cdc schemas, and then further transformed into various other objects (views) by way of a dbt-driven ingestion process.
+
+For more information visit our [simplepractice-cdc-dbt Data Flow page on Notion](https://www.notion.so/simplepractice/Product-Data-Ingestion-simplepractice-cdc-dbt-Data-Flow-and-Layout-bb30782d359d4879a668094e7e5d0502)
