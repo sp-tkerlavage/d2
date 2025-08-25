@@ -121,8 +121,14 @@ jobs:
         if: steps.changed-files.outputs.d2_files_to_generate != ''
         env:
           TSTRUCT_TOKEN: ${{ secrets.TALA_API_KEY }}
+          GITHUB_ACTIONS: true
         run: |
           echo "Generating diagrams for changed .d2 files that don't have updated PNGs..."
+          
+          # Debug: Check if scripts directory structure is correct
+          echo "Checking scripts directory structure:"
+          ls -la ./scripts/ || echo "Cannot list scripts directory"
+          ls -la ./scripts/lib/ || echo "Cannot list scripts/lib directory"
           
           # Use the shared script for diagram generation
           echo "${{ steps.changed-files.outputs.d2_files_to_generate }}" | while IFS= read -r file; do
