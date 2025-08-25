@@ -1,0 +1,358 @@
+# Color styles
+classes: {
+  sun-500: {
+    style: {
+      fill: "#ffd233"
+      stroke: "#ffc700"
+    }
+  }
+  sun-400: {
+    style: {
+      fill: "#fd6"
+      stroke: "#ffd233"
+    }
+  }
+  sun-300: {
+    style: {
+      fill: "#ffe999"
+      stroke: "#fd6"
+    }
+  }
+  sun-200: {
+    style: {
+      fill: "#fff4cc"
+      stroke: "#ffe999"
+    }
+  }
+  sun-100: {
+    style: {
+      fill: "#fffaeb"
+      stroke: "#fff4cc"
+    }
+  }
+  
+  mint-500: {
+    style: {
+      fill: "#9be8a8"
+      stroke: "#77d286"
+    }
+  }
+  mint-400: {
+    style: {
+      fill: "#c2eec9"
+      stroke: "#9be8a8"
+    }
+  }
+  mint-300: {
+    style: {
+      fill: "#d3f3d9"
+      stroke: "#c2eec9"
+    }
+  }
+  mint-200: {
+    style: {
+      fill: "#e5fae7"
+      stroke: "#d3f3d9"
+    }
+  }
+  mint-100: {
+    style: {
+      fill: "#eefcef"
+      stroke: "#e5fae7"
+    }
+  }
+  
+  clay-500: {
+    style: {
+      fill: "#fe9a9a"
+      stroke: "#dd7878"
+    }
+  }
+  clay-400: {
+    style: {
+      fill: "#fecdcd"
+      stroke: "#fe9a9a"
+    }
+  }
+  clay-300: {
+    style: {
+      fill: "#fddddd"
+      stroke: "#fecdcd"
+    }
+  }
+  clay-200: {
+    style: {
+      fill: "#fdefef"
+      stroke: "#fddddd"
+    }
+  }
+  clay-100: {
+    style: {
+      fill: "#fef5f5"
+      stroke: "#fdefef"
+    }
+  }
+  
+  sky-500: {
+    style: {
+      fill: "#9fe3f9"
+      stroke: "#6cc2dd"
+    }
+  }
+  sky-400: {
+    style: {
+      fill: "#bce9f8"
+      stroke: "#9fe3f9"
+    }
+  }
+  sky-300: {
+    style: {
+      fill: "#cdeff9"
+      stroke: "#bce9f8"
+    }
+  }
+  sky-200: {
+    style: {
+      fill: "#dbf2fa"
+      stroke: "#cdeff9"
+    }
+  }
+  sky-100: {
+    style: {
+      fill: "#e7f5f8"
+      stroke: "#dbf2fa"
+    }
+  }
+  
+  forest-500: {
+    style: {
+      fill: "#7f9595"
+      stroke: "#617c7c"
+    }
+  }
+  forest-400: {
+    style: {
+      fill: "#9eaeae"
+      stroke: "#7f9595"
+    }
+  }
+  forest-300: {
+    style: {
+      fill: "#bec9c9"
+      stroke: "#9eaeae"
+    }
+  }
+  forest-200: {
+    style: {
+      fill: "#dee3e3"
+      stroke: "#bec9c9"
+    }
+  }
+  forest-100: {
+    style: {
+      fill: "#eef1f1"
+      stroke: "#dee3e3"
+    }
+  }
+
+  grape-500: {
+    style: {
+      fill: "#c5b1e5"
+      stroke: "#aa8cdb"
+    }
+  }
+  grape-400: {
+    style: {
+      fill: "#d7caed"
+      stroke: "#c5b1e5"
+    }
+  }
+  grape-300: {
+    style: {
+      fill: "#e3daf2"
+      stroke: "#d7caed"
+    }
+  }
+  grape-200: {
+    style: {
+      fill: "#eee8f6"
+      stroke: "#e3daf2"
+    }
+  }
+  grape-100: {
+    style: {
+      fill: "#f7f4fa"
+      stroke: "#eee8f6"
+    }
+  }
+}
+
+direction: right
+
+product: "Product Transactional Databases\n(AWS MySQL Aurora)" {
+  class: sun-500
+  simplepractice: SimplePractice {
+    class: sun-400
+    simplepractice: simplepractice{
+      class: sun-300
+    }
+    simplepractice_messaging: simplepractice_messaging{
+      class: sun-300
+    }
+    simplepractice_video: simplepractice_video{
+      class: sun-300
+    }
+  }
+  simplepractice_events: simplepractice_eventszzzz{
+    class: sun-400
+  }
+  monarch: monarch{
+    class: sun-400
+  }
+  sso_account: sso_account{
+    class: sun-400
+  }
+  trackyourhours: TrackYourHours {
+    class: sun-400
+    trackyourhours: trackyourhours{
+      class: sun-300
+    }
+    trackyourhours_rails: trackyourhours_rails{
+      class: sun-300
+    }
+  }
+  releasebot: releasebot {
+    class: sun-400
+  }
+  trackyourceus: trackyourceus\n(deprecated){
+    class: clay-500
+  }
+}
+
+dms: AWS DMS{
+  class: clay-500
+  replication_instance: Replication Instance\n(rds-to-s3) {
+    class: clay-400
+    tasks: Tasks {
+      class: clay-300
+        main-to-s3 {
+          class: clay-200
+        }
+        main-appt-to-s3 {
+          class: clay-200
+        }
+        main-messaging-to-s3 {
+          class: clay-200
+        }
+        main-video-to-s3 {
+          class: clay-200
+        }
+        audits-to-s3 {
+          class: clay-200
+        }
+        class: clay-200
+        monarch-to-s3 {
+          class: clay-200
+        }
+        trackyourhours-to-s3 {
+          class: clay-200
+        }
+        releasebot-to-s3 {
+          class: clay-200
+        }
+        sso-to-s3 {
+          class: clay-200
+        }
+        trackyourceus-to-s3: trackyourceus-to-s3\n(deprecated){
+          class: clay-500
+        }
+    }
+  }
+}
+
+s3: AWS S3{
+  class: grape-500
+  bucket{
+    class: grape-400
+    simplepractice: simplepractice{
+      class: grape-300
+    }
+    simplepractice_messaging: simplepractice_messaging{
+      class: grape-300
+    }
+    simplepractice_video: simplepractice_video{
+      class: grape-300
+    }
+    simplepractice_events: simplepractice_events{
+      class: grape-300
+    }
+    sso_account: sso_account{
+      class: grape-300
+    }
+    monarch: monarch{
+      class: grape-300
+    }
+    trackyourhours: trackyourhours{
+      class: grape-300
+    }
+    trackyourhours_rails: trackyourhours_rails{
+      class: grape-300
+    }
+    releasebot: releasebot {
+      class: grape-300
+    }
+    trackyourceus: trackyourceus\n(deprecated){
+      class: clay-500
+    }
+  }
+}
+
+product.simplepractice.simplepractice <-> dms.replication_instance.tasks.main-to-s3: "binlog-to-CDC"
+product.simplepractice.simplepractice <-> dms.replication_instance.tasks.main-appt-to-s3: "binlog-to-CDC"
+product.simplepractice.simplepractice_messaging <-> dms.replication_instance.tasks.main-messaging-to-s3: "binlog-to-CDC"
+product.simplepractice.simplepractice_video <-> dms.replication_instance.tasks.main-video-to-s3: "binlog-to-CDC"
+product.simplepractice_events <-> dms.replication_instance.tasks.audits-to-s3: "binlog-to-CDC"
+product.monarch <-> dms.replication_instance.tasks.monarch-to-s3: "binlog-to-CDC"
+product.sso_account <-> dms.replication_instance.tasks.sso-to-s3: "binlog-to-CDC"
+product.trackyourhours.trackyourhours <-> dms.replication_instance.tasks.trackyourhours-to-s3: "binlog-to-CDC"
+product.trackyourhours.trackyourhours_rails <-> dms.replication_instance.tasks.trackyourhours-to-s3: "binlog-to-CDC"
+product.releasebot <-> dms.replication_instance.tasks.releasebot-to-s3: "binlog-to-CDC"
+product.trackyourceus <-> dms.replication_instance.tasks.trackyourceus-to-s3: "binlog-to-CDC"
+
+dms.replication_instance.tasks.main-to-s3 -> s3.bucket.simplepractice: "parquet files"
+dms.replication_instance.tasks.main-appt-to-s3 -> s3.bucket.simplepractice: "parquet files"
+dms.replication_instance.tasks.main-messaging-to-s3 -> s3.bucket.simplepractice_messaging: "parquet files"
+dms.replication_instance.tasks.main-video-to-s3 -> s3.bucket.simplepractice_video: "parquet files"
+dms.replication_instance.tasks.audits-to-s3 -> s3.bucket.simplepractice_events: "parquet files"
+dms.replication_instance.tasks.monarch-to-s3 -> s3.bucket.monarch: "parquet files"
+dms.replication_instance.tasks.sso-to-s3 -> s3.bucket.sso_account: "parquet files"
+dms.replication_instance.tasks.trackyourhours-to-s3 -> s3.bucket.trackyourhours: "parquet files"
+dms.replication_instance.tasks.trackyourhours-to-s3 -> s3.bucket.trackyourhours_rails: "parquet files"
+dms.replication_instance.tasks.releasebot-to-s3 -> s3.bucket.releasebot: "parquet files"
+dms.replication_instance.tasks.trackyourceus-to-s3 -> s3.bucket.trackyourceus: "parquet files"
+
+s3.bucket.simplepractice
+s3.bucket.simplepractice
+s3.bucket.simplepractice_messaging
+s3.bucket.simplepractice_video
+s3.bucket.simplepractice_events
+s3.bucket.monarch
+s3.bucket.sso_account
+s3.bucket.trackyourhours
+s3.bucket.trackyourhours_rails
+s3.bucket.releasebot
+s3.bucket.trackyourceus
+
+# dms -> aws_s3: "CDC Messages in Parquet Format"
+# aws_s3 -> snowflake.storage_integration: "Storage Integration"
+# snowflake.storage_integration -> snowflake.external_stages.top_level: "Top-Level Stage"
+# snowflake.external_stages.top_level -> snowflake.external_stages.source_stages: "Source Stages"
+# snowflake.external_stages.source_stages -> snowflake.external_tables.source_tables: "External Tables"
+# snowflake.external_tables.source_tables -> snowflake.dbt_ingestion.cdc_tables: "CDC Tables"
+# snowflake.dbt_ingestion.cdc_tables -> snowflake.dbt_ingestion.scd_tables: "SCD Tables"
+# snowflake.dbt_ingestion.scd_tables -> snowflake.dbt_ingestion.views.real_time: "Real-Time Views"
+# snowflake.dbt_ingestion.scd_tables -> snowflake.dbt_ingestion.views.current_state: "Current-State Views"
+# snowflake.dbt_ingestion.scd_tables -> snowflake.dbt_ingestion.views.latest_state: "Latest-State Views"
+# snowflake.dbt_ingestion.scd_tables -> snowflake.dbt_ingestion.views.date_stamped: "Date-Stamped Views"
+# snowflake.dbt_ingestion.views -> snowflake.data_masking: "Tag-Based Masking"
+# snowflake.data_masking -> snowflake.data_sharing: "Secure Data Sharing"
