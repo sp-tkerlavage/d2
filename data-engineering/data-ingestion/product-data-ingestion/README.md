@@ -30,6 +30,8 @@ AWS Database Migration Service (AWS DMS) is a fully-managed cloud service that m
 
 For our use-case, we primarily use DMS as a Change Data Capture engine. DMS is configured to read the production application databases' transaction logs for change-data events. These events are captured and can be sent to a variety of targets. In our case, DMS logs these CDC messages to parquet files in S3.  Once we have CDC data in S3, we can query it directly from Snowflake and transform it in a variety of ways.
 
+test
+
 For more information visit our [DMS page on Notion](https://www.notion.so/simplepractice/Product-Data-Ingestion-What-is-AWS-DMS-Why-AWS-DMS-8fc9be0f9f634f298c46589650ab16a9)
 
 ![Dms](./diagrams/02-dms.png)
